@@ -20,6 +20,7 @@ class PackageController extends Controller
     {
         $packages = Package::orderBy('name')->get();
         return view('packages.index', compact('packages'));
+        // return view('packages.index', compact('packages'));
     }
 
     public function create()
@@ -57,7 +58,7 @@ class PackageController extends Controller
         if (!auth()->user()->isAdmin()) {
             redirect('/');
         }
-        return view('packages.show', compact('package'));
+        return response()->json($package);
     }
 
     public function edit(Package $package)

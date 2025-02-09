@@ -33,8 +33,8 @@ class DashboardController extends Controller
 
         $usersWithDueCount = User::where('role', 'user')->get()
             ->filter(function ($user) {
-            return $user->due_amount($user->id) > 0;
-        })->count();
+                return $user->due_amount($user->id) > 0;
+            })->count();
         $usersWithDueList = User::where('role', 'user')->get()
             ->filter(function ($user) {
                 return $user->due_amount($user->id) > 0;

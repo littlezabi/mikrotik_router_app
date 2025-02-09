@@ -76,10 +76,26 @@ class LoginRequest extends FormRequest
     }
 
     /**
+     * Get the validation messages that apply to the request.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'The email field is required.',
+            'email.string' => 'The email must be a string.',
+            'email.email' => 'The email must be a valid email address.',
+            'password.required' => 'The password field is required.',
+            'password.string' => 'The password must be a string.',
+        ];
+    }
+
+    /**
      * Get the rate limiting throttle key for the request.
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
     }
 }

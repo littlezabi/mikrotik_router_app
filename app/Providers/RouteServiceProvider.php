@@ -20,19 +20,23 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/';
 
     /**
-     * Define your route model bindings, pattern filters, and other route configuration.
+     * Define route model bindings, pattern filters, and other route configuration.
      */
     public function boot(): void
     {
+        // Rate Limiting for API requests
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
+        // Define routes for web and API
         $this->routes(function () {
+            // API routes (localhost:8000/api/*)
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            // Web routes (localhost:8000/*)
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });

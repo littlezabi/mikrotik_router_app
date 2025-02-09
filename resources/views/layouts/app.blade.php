@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Scripts -->
+    @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>

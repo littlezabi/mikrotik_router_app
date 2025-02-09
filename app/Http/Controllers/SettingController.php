@@ -23,6 +23,7 @@ class SettingController extends Controller
 
     public function update(SettingRequest $request)
     {
+        // dd($request);
         try {
             $client = new Client([
                 'host' => $request->router_ip,
